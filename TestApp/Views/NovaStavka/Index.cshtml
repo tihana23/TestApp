@@ -1,0 +1,32 @@
+﻿@model List<TestApp.Models.NovaStavka>
+
+
+<h2>Popis Novih Stavki--ovo je u izradi- ne radi dobro</h2>
+
+<table class="table">
+    <tr>
+        <th>ID Stavke</th>
+        <th>Naziv</th>
+        <th>Jedinicna Cijena</th>
+        <th></th>
+    </tr>
+
+    @foreach (var stavka in Model)
+    {
+        <tr>
+            <td>@stavka.IdStavke</td>
+            <td>@stavka.Naziv</td>
+            <td>@stavka.JedinicnaCijena.ToString("C")</td>
+            <td>@Html.ActionLink("Uredi", "Edit", new { id = stavka.IdStavke })</td>
+            <td>
+                @using (Html.BeginForm("DeleteStavke", "NovaStavka", new { id = stavka.IdStavke }, FormMethod.Post))
+                {
+                    <input type="submit" value="Briši Stavku" onclick="return confirm('Jeste li sigurni da želite obrisati ovu stavku?');" class="btn btn-danger" />
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+<!-- Link za dodavanje nove stavke -->
+@Html.ActionLink("Dodaj novu stavku", "Add", FormMethod.Post)
