@@ -1,0 +1,38 @@
+﻿@model TestApp.Models.Racun
+
+@{
+    ViewData["Title"] = "NoviRacun";
+}
+
+<h1>Novi Racun za:</h1>
+
+<div>
+    <h6>Naziv Dućana: @ViewBag.NazivDucana</h6>
+    <h6>Adresa Dućana: @ViewBag.AdresaDucana</h6>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DodajNoviRacun" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="IdDucana" type="hidden" />
+            <div class="form-group">
+                <label asp-for="Datum" class="control-label"></label>
+                <input asp-for="Datum" class="form-control" />
+                <span asp-validation-for="Datum" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="Izradi novi racun" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Natrag na popis ducana</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

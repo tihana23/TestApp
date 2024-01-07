@@ -1,0 +1,73 @@
+﻿@model List<StavkaRacuna>
+@{
+    ViewBag.Title = "Popis Stavke Racuna";
+   }
+
+<h2>@ViewBag.Title</h2>
+<div>
+    <h6>Id Racuna: @ViewBag.IdRacun</h6>
+    <h6>Naziv Dućana: @ViewBag.NazivDucana</h6>
+    <h6>Adresa Dućana: @ViewBag.AdresaDucana</h6>
+</div>
+@if (Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>ID Stavke</th>
+            <th>Naziv stavke</th>
+            <th>Kolicina</th>
+            <th>Jedinicna cijena</th>
+
+        </tr>
+
+        @foreach (var stavkaRacuna in Model)
+        {
+            <tr>
+                <td>@stavkaRacuna.IdStavkeRacuna</td>
+               
+                <td>@stavkaRacuna.Naziv</td>
+                <td>@stavkaRacuna.Kolicina</td>
+                <td>@stavkaRacuna.JedinicnaCijena</td>
+
+                @if (!ViewBag.RacunZakljucan)
+                {
+                    <td>@Html.ActionLink("Izmijeni stavku", "EditStavke", new { id = stavkaRacuna.IdStavkeRacuna })</td>
+                    <td>
+                        @using (Html.BeginForm("DeleteStavkaRacuna", "Home", new { idStavkeRacuna = stavkaRacuna.IdStavkeRacuna }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="submit" value="Briši" onclick="return confirm('Jeste li sigurni da želite obrisati ovu stavku?');" class="btn btn-danger" />
+                        }
+                    </td>
+                }
+              
+            </tr>
+
+          
+        }
+    </table>
+}
+
+else
+{
+    <p>Nema stavki za prikaz.</p>
+}
+@if (!ViewBag.RacunZakljucan)
+{
+    <td>@Html.ActionLink("Dodaj nove stavke na račun", "NoveStavkeRacuna", new { IdRacun = ViewBag.IdRacun })</td>
+}
+
+<div>
+    <div>IdRacuna: @ViewBag.IDRacun</div>
+    <div>IdDucana: @ViewBag.IdDucana</div>
+    <div>
+       
+        <a asp-controller="Home" asp-action="PopisRacuna" asp-route-id="@ViewBag.IdDucana">Natrag na popis liste računa za dućan</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
