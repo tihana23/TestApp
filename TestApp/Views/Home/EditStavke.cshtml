@@ -1,0 +1,45 @@
+﻿@model TestApp.Models.StavkaRacuna
+
+@{
+    ViewBag.Title = "Uredi Stavku";
+}
+
+<h2>@ViewBag.Title</h2>
+<div>
+  
+    <p>Izmjenu radimo na sljedecoj stavci:</p>
+    <p>Naziv stavke: @Model.Naziv 
+       Količina: @Model.Kolicina 
+       Jedinična cijena: @Model.JedinicnaCijena</p>
+    <div>
+        
+    </div>
+   
+</div>
+@using (Html.BeginForm("UpdateStavkaRacuna", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.IdStavkeRacuna)
+    @Html.HiddenFor(model => model.IdRacun)
+   
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Naziv)
+        <div>
+            @Html.TextBoxFor(model => model.Naziv)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Kolicina)
+        <div>
+            @Html.TextBoxFor(model => model.Kolicina)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.JedinicnaCijena)
+        <div>
+            @Html.TextBoxFor(model => model.JedinicnaCijena)
+        </div>
+    </div>
+
+    <input type="submit" value="Ažuriraj" class="btn btn-primary" />
+}

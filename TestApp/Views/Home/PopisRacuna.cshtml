@@ -1,0 +1,94 @@
+﻿@model List<Racun>
+
+@{
+    ViewBag.Title = "Popis Računa";
+    
+}
+
+<h2>@ViewBag.Title</h2>
+<div>
+    <h6>Naziv Dućana: @ViewBag.NazivDucana</h6>
+    <h6>Adresa Dućana: @ViewBag.AdresaDucana</h6>
+</div>
+@if (Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>ID Računa</th>
+            <th>Datum</th>
+            <th>Ukupan zbroj stavaka na racunu</th>
+          
+        
+        </tr>
+
+        @foreach (var racun in Model) 
+        {
+            <tr>
+                <td>@racun.IdRacun</td>
+                <td>@racun.Datum</td>
+                <td>@racun.UkupanZbrojStavakaRacuna</td>
+                <td>@Html.ActionLink("Prikaži stavke racuna", "StavkeRacuna", new { id = racun.IdRacun })</td>
+
+                @if (!racun.Zakljucan)
+                {
+                    <td> @Html.ActionLink("  Dodaj nove stavke na račun", "NoveStavkeRacuna", new { IdRacun = racun.IdRacun })</td>
+                   
+                        using (Html.BeginForm("ZakljucajRacun", "Home", new { id = racun.IdRacun }, FormMethod.Post)) //ovdje trebam da samo se zakljuca a da nema prenosa nigdje
+                    {
+                        <td>  <input type="submit" value="Zaključaj račun"  />
+                        </td>
+                            }
+                    <td>
+                        @using (Html.BeginForm("DeleteRacun", "Home", new { idRacuna = racun.IdRacun }, FormMethod.Post))
+                        {
+                            <input type="submit" value="Briši racun" onclick="return confirm('Jeste li sigurni da želite obrisati racun i sve stavke?');" class="btn btn-danger" />
+                        }
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @using (Html.BeginForm("OtkljucajRacun", "Home",  new { id = racun.IdRacun }, FormMethod.Post))
+                        {
+                            <input type="submit" value="Otkljucaj racun" />
+                        }
+                    </td>
+                }
+
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>Nema računa za prikaz.</p>
+}
+<div>
+    @Html.ActionLink("Napravi novi racun", "NoviRacun", new { idDucana = ViewBag.IdDucana })
+</div>
+<div>
+    @using (Html.BeginForm("StavkeRacuna", "Home", FormMethod.Get))
+    {
+        <div>
+            <h5>Odaberi račun iz liste da se prikažu sve stavke računa</h5>
+            <select id="dropdowntipo" name="id">
+                <option value="">Odaberi račun</option>
+                @foreach (var item in Model)
+                {
+                    <option value="@item.IdRacun">@item.Datum, @item.UkupanZbrojStavakaRacuna</option>
+                }
+            </select>
+            <input type="submit" value="Prikaži stavke" />
+        </div>
+    }
+</div>
+<div>
+    <a asp-action="Index">Natrag na popis ducana</a>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
