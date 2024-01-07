@@ -100,7 +100,11 @@ namespace TestApp.Controllers
         [HttpGet]
         public IActionResult NoviRacun(int idDucana)
         {
-            var model = new Racun { IdDucana = idDucana };
+            var model = new Racun
+            {
+                IdDucana = idDucana,
+                Datum = DateTime.Now // danasnji datum i vrijeme
+            };
             var ducan = ducanService.GetDucanById(idDucana);
             ViewBag.IdDucana = idDucana;
             ViewBag.NazivDucana = ducan.NazivDucana;
