@@ -24,7 +24,7 @@ namespace TestApp.Services
             return novaStavkas.FirstOrDefault(d => d.IdStavke == id);
         }
 
-        public void AddStavka(NovaStavka novaStavka)
+        public void AddNovaStavka(NovaStavka novaStavka)
         { 
             if (novaStavkas.Count == 0)
             {
@@ -38,13 +38,12 @@ namespace TestApp.Services
         }
 
 
-        public void DeleteStavka(int idStavke)
+        public void DeleteStavka(int id)
         {
-            var stavka = novaStavkas.FirstOrDefault(s => s.IdStavke == idStavke);
-            if (stavka != null)
-            {
+            var stavka = novaStavkas.FirstOrDefault(s => s.IdStavke == id);
+            
                 novaStavkas.Remove(stavka);
-            }
+            
         }
 
         public void UpdateStavka(NovaStavka updatedStavka)
@@ -57,16 +56,18 @@ namespace TestApp.Services
             }
         }
 
-        private void SimulateDatabase()
+        public void SimulateDatabase()
         {
 
 
             NovaStavka stavka1 = new NovaStavka { IdStavke = 1, Naziv = "Kruhic", JedinicnaCijena =22 };
-
+            NovaStavka stavka2 = new NovaStavka { IdStavke = 2, Naziv = "jaja", JedinicnaCijena = 27};
 
 
             novaStavkas.Add(stavka1);
-        }
+
+            novaStavkas.Add(stavka2);
     }
 }
 
+}

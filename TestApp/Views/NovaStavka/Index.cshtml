@@ -1,7 +1,7 @@
 ﻿@model List<TestApp.Models.NovaStavka>
 
 
-<h2>Popis Novih Stavki--ovo je u izradi- ne radi dobro</h2>
+<h2>Popis Novih Stavki--ovo ce se mozda spojiti sa ducanom</h2>
 
 <table class="table">
     <tr>
@@ -19,9 +19,9 @@
             <td>@stavka.JedinicnaCijena.ToString("C")</td>
             <td>@Html.ActionLink("Uredi", "Edit", new { id = stavka.IdStavke })</td>
             <td>
-                @using (Html.BeginForm("DeleteStavke", "NovaStavka", new { id = stavka.IdStavke }, FormMethod.Post))
+                @using (Html.BeginForm("DeleteStavka", "NovaStavka", new { id = stavka.IdStavke }))
                 {
-                    <input type="submit" value="Briši Stavku" onclick="return confirm('Jeste li sigurni da želite obrisati ovu stavku?');" class="btn btn-danger" />
+                    <input type="submit" value="Briši Stavku" class="btn btn-danger" />
                 }
             </td>
         </tr>
