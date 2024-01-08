@@ -6,11 +6,11 @@ namespace TestApp.Controllers
 {
     public class NovaStavkaController : Controller
     {
-        private NovaStavkaServices _novaStavkaServices;
+        public NovaStavkaServices _novaStavkaServices;
 
-        public NovaStavkaController()
+        public NovaStavkaController(NovaStavkaServices novaStavkaServices)
         {
-            _novaStavkaServices = new NovaStavkaServices();
+            _novaStavkaServices = novaStavkaServices;
         }
 
         [HttpGet]
@@ -30,10 +30,10 @@ namespace TestApp.Controllers
         public IActionResult AddNovaStavka(NovaStavka novaStavka)
         {
             
-                _novaStavkaServices.AddStavka(novaStavka);
-            
-            
-            return View(novaStavka);
+                _novaStavkaServices.AddNovaStavka(novaStavka);
+
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -55,20 +55,24 @@ namespace TestApp.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public IActionResult DeleteStavke(int idStavke)
+        public IActionResult DeleteStavka(int id)
         {
-            // Dohvatite stavku računa kako bi dobili ID računa prije brisanja
-            var stavka = _novaStavkaServices.GetAllStavka().FirstOrDefault(s => s.IdStavke == idStavke);
-          
-                _novaStavkaServices.DeleteStavka(idStavke);
+            var stavka = _novaStavkaServices.GetNovaStavkaById(id);
 
-                // Preusmjeravanje na StavkeRacuna za određeni ID računa
-              
-          
-                // stavka nije pronadena odi na index
-                return RedirectToAction("Index");
-            
+            if (stavka != null)
+            {
+                _novaStavkaServices.DeleteStavka(id);
+            }
+            else
+            {
+                // Ako stavka ne postoji, možete vratiti grešku ili preusmjeriti na drugu stranicu
+                return NotFound(); // Ili neki drugi odgovarajući odgovor
+            }
+
+            // Nakon brisanja stavke, preusmjerite na stranicu koja prikazuje sve stavke
+            return RedirectToAction("Index");
         }
     }
-}
+    }
+
 
