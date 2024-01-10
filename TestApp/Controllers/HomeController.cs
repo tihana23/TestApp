@@ -19,7 +19,7 @@ namespace TestApp.Controllers
             this.racunService = racunService;
             this.stavkaRacunaServices = stavkaRacunaServices;
         }
-        //testtzu
+        
         [HttpGet]
         public IActionResult Index()
         {
@@ -121,7 +121,7 @@ namespace TestApp.Controllers
 
         //Nove stavke
         [HttpGet]
-        [HttpGet]
+       
         public IActionResult NoveStavkeRacuna(int IdRacun) // Ovdje ime parametra mora odgovarati onome u URL-u
         {
             var model = new StavkaRacuna { IdRacun = IdRacun };
