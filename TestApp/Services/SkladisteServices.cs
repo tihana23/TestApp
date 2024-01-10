@@ -49,13 +49,9 @@ namespace TestApp.Services
     public void SimulateDatabase()
         {
 
-
             Skladiste stavka1 = new Skladiste { IdSkladista =1, NazivSkladista = "Skladiste1", IdStavke = 1, KolicinaStavaka =23};
             Skladiste stavka2 = new Skladiste { IdSkladista =1, NazivSkladista = "Skladiste1", IdStavke = 2, KolicinaStavaka = 74 };
-
-
             novoSkladiste.Add(stavka1);
-
             novoSkladiste.Add(stavka2);
         }
     }
