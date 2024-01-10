@@ -25,7 +25,9 @@ namespace TestApp.Controllers
                 skladiste.NazivStavke = sveStavke.FirstOrDefault(stavka => stavka.IdStavke == skladiste.IdStavke)?.Naziv ?? "N/A";
             }
 
-            ViewBag.NazivStavke = skladista.ToDictionary(s => s.IdStavke, s => s.NazivStavke);
+            ViewBag.NazivStavke = skladista
+     .GroupBy(s => s.IdStavke)
+     .ToDictionary(g => g.Key, g => g.First().NazivStavke);
 
             return View(skladista);
         }
