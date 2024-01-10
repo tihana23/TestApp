@@ -1,0 +1,16 @@
+﻿@model TestApp.Models.Skladiste
+
+@{
+    ViewData["Title"] = "Uredi Stavku";
+}
+
+<h2>Uredi Stavku</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="IdStavke" />
+    <div class="form-group">
+        <label asp-for="KolicinaStavaka">Količina Stavaka</label>
+        <input asp-for="KolicinaStavaka" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Spremi promjene</button>
+</form>

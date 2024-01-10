@@ -12,6 +12,7 @@ builder.Services.AddSingleton<DucanService>();
 builder.Services.AddSingleton<RacuniServices>();
 builder.Services.AddSingleton<StavkaRacunaServices>();
 builder.Services.AddSingleton<NovaStavkaServices>();
+builder.Services.AddSingleton<SkladisteServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

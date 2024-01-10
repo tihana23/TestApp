@@ -22,6 +22,7 @@ namespace TestApp.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+
             return View(new NovaStavka());
         }
 
