@@ -12,4 +12,6 @@ Zakljucavanje racuna da se ni stavke vise ne mogu editirati ni dodavati
 
 Otkljucavanje zakljucanog racuna
 
-Dodavanje novih stavaka koje nisu vezane trenutno
+Dodavanje novih stavaka  - jednom ce biti povezano sa racunima
+
+Skladište stavaka - povezano sa dodavanjem novih stavaka - jednom ce biti povezano sa racunima
