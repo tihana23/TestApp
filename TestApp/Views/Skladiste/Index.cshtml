@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TestApp.Models.Skladiste>
+@{
+   ViewData["Title"] = "Skladište";
+}
+
+@if (Model != null && Model.Any())
+{
+    <h3>Naziv Skladišta: @Model.First().NazivSkladista</h3>
+    <h3>Id Skladišta: @Model.First().IdSkladista</h3>
+    <!-- Ostatak koda za prikaz podataka -->
+}
+else
+{
+    <p>Nema dostupnih podataka o skladištu.</p>
+}
+
+<h2>Skladište</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>Naziv Stavke</th>
+            <th>Količina Stavaka</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stavka in Model)
+        {
+            <tr>
+                <td>@ViewBag.NazivStavke[stavka.IdStavke]</td>
+                <td>@stavka.KolicinaStavaka</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Skladiste", new { id = stavka.IdStavke })" class="btn btn-primary">Uredi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Add", "Skladiste")" class="btn btn-primary">Dodaj novu stavku</a>

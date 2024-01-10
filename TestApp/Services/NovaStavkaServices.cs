@@ -62,12 +62,12 @@ namespace TestApp.Services
 
             NovaStavka stavka1 = new NovaStavka { IdStavke = 1, Naziv = "Kruhic", JedinicnaCijena =22 };
             NovaStavka stavka2 = new NovaStavka { IdStavke = 2, Naziv = "jaja", JedinicnaCijena = 27};
-
+            NovaStavka stavka3 = new NovaStavka { IdStavke = 3, Naziv = "Maslac", JedinicnaCijena = 27 };
 
             novaStavkas.Add(stavka1);
-
             novaStavkas.Add(stavka2);
-    }
+            novaStavkas.Add(stavka3);
+        }
 }
 
 }
